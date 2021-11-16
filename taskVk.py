@@ -31,29 +31,29 @@ def findField(selector):
     input_field_box_model = get_click_coords(node_id=input_log)
     mouseClick(tab, input_field_box_model[0], input_field_box_model[1])
 
-subprocess.Popen("C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --user-data-dir=remote-profile") #что делает эта функция 
+subprocess.Popen("C:\Program Files\Google\Chrome\Application\chrome.exe --remote-debugging-port=9222 --user-data-dir=remote-profile")  
 time.sleep(5)
 
-browser = pychrome.Browser(url='http://127.0.0.1:9222') #read 
+browser = pychrome.Browser(url='http://127.0.0.1:9222') 
 tab = browser.new_tab()
 
 tab.start()
-tab.call_method("Network.enable") #read
-tab.call_method("Page.navigate", url="https://vk.com/", _timeout=5) #read
+tab.call_method("Network.enable")
+tab.call_method("Page.navigate", url="https://vk.com/", _timeout=5) 
 time.sleep(5)
 
 #находим поле для ввода логина и пароля и вводим пароль
 input_key_log = findField(selector=SEARCH_KLO_LOC)
-tab.call_method("Input.insertText", text="*******")
+tab.call_method("Input.insertText", text="****")
 """
 input_key_log = fieldId(node_id=rootId, selector=SEARCH_KLO_LOC)
 input_field_box_model = get_click_coords(node_id=input_key_log)
 mouseClick(tab, input_field_box_model[0], input_field_box_model[1]) #мы нашли в странице поле ввода и кликнули тут на него 
-tab.call_method("Input.insertText", text="89833230070")
+tab.call_method("Input.insertText", text="****")
 """
 #находим поле ввода логина и вводим пароль
 input_key_pas = findField(selector=SEARCH_KPA_LOC)
-tab.call_method("Input.insertText", text="*****")
+tab.call_method("Input.insertText", text="***")
 tab.wait(2)
 #находим кнопку войти, нажимаем и должны войти в вк
 input_entrance = findField(selector=SEARCH_ENT_LOC)
@@ -62,18 +62,21 @@ time.sleep(10)
 input_mes = findField(selector=SEARCH_MES_LOC)
 tab.wait(5)
 #переходим в диалог
-tab.call_method("Page.navigate", url="https://vk.com/im?sel=245528465", _timeout=5) #read
+tab.call_method("Page.navigate", url="****", _timeout=5) 
 time.sleep(5)
 #отправляем 5 сообщений циклом
-for i in range(5):
+for i in range(2):
     #пишем сообщение 
     input_communication = findField(selector=SEARCH_COMMUN_LOC)
-    tab.call_method("Input.insertText", text="таков наш путь и никаков больше")
+    tab.call_method("Input.insertText", text="это только ради науки")
     tab.wait(3)
     #нажимаем на кнопку отправить сообщение
     input_send = findField(selector=SEARCH_SEND_LOC)
+
+tab.call_method("Network.clearBrowserCache")
+"""
 #ВОзвращяемся обратно в новостную ленту чтобы выйти из вк
-tab.call_method("Page.navigate", url="https://vk.com/feed", _timeout=5) #read
+tab.call_method("Page.navigate", url="https://vk.com/feed", _timeout=5) 
 time.sleep(5)
 #нажимаем на настройки чтобы выйти. 
 input_nas = findField(selector=SEARCH_NAS_LOC)
@@ -83,8 +86,7 @@ input_exit = findField(selector=SEARCH_EXT_LOC)
 tab.wait(10)
 #очистка кэша браузера
 #tab.Network.clearBrowserCache()
-#result = tab.call_method("Network.clearBrowserCache")
-#print(result)
-#tab.wait(5)
+#tab.call_method("Network.clearBrowserCache")
+"""
 tab.stop()
-browser.close_tab(tab) #read    
+browser.close_tab(tab) #
